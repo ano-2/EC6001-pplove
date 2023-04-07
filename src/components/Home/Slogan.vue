@@ -5,7 +5,7 @@
         <van-divider :style="{ color: '#053396', borderColor: '#053396', padding: '0 15px' }">
             Slogan
         </van-divider>
-        <van-skeleton  avatar title :row="8" />
+        <van-skeleton  avatar title :row="2" />
         <div class="slogan-img">
             <van-image
             width="100%"

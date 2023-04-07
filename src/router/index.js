@@ -42,6 +42,26 @@ const router = createRouter({
       path: '/productDetail/:id',
       name: 'product',
       component: () => import('@/views/ProductDetail.vue')
+    },
+    {
+      path: '/community',
+      name: 'community',
+      component: () => import('@/views/Community.vue')
+    },
+    {
+      path: '/articleDetail/:id',
+      name: 'article',
+      component: () => import('@/views/ArticleDetail.vue')
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: () => import('@/views/Order.vue')
+    },
+    {
+      path: '/createOrder',
+      name: 'createOrder',
+      component: () => import('@/views/CreateOrder.vue')
     }
   ]
 })

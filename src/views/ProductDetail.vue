@@ -13,9 +13,8 @@
     <div class="action-bar">
       <van-action-bar>
         <van-action-bar-icon icon="wap-home-o" to="/home"  text="主页" />
-        <van-action-bar-icon icon="cart-o" :badge="0" to="/cart" text="购物车" />
+        <van-action-bar-icon icon="cart-o" :badge="cartItemCount" to="/cart" text="购物车" />
         <van-action-bar-button type="warning" @click="handleAddCart" text="加入购物车" />
-        <van-action-bar-button type="danger" @click="handleAddCart" text="立即购买" />
       </van-action-bar>
     </div>
   </div>
@@ -24,14 +23,21 @@
 <script setup>
 import ProDetailSwipe from '@/components/Product/ProDetailSwipe.vue'
 import ProDetailContent from '@/components/Product/ProDetailContent.vue'
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { showSuccessToast, showFailToast } from 'vant'
 import { getProDetail } from '@/service/good.js'
+// pinia购物车数据
+import { useCartStore } from '@/stores/cart.js'
+import { storeToRefs } from 'pinia'
 
+// 初始化购物车
 const route = useRoute()
 const router = useRouter()
-
+// 初始化pinia
+const cart = useCartStore()
+const { cartItems } = storeToRefs(cart)
+const cartItemCount = computed(() => cartItems.value.length)
 const state = reactive({
   goodsDetail: []
 })
@@ -55,8 +61,21 @@ const goBack = () => {
 }
 // 单机添加购物车
 const handleAddCart = async () => {
-  showSuccessToast('功能开发中')
+  if (cartItemCount.value < 5) {
+    cart.addItem({
+      id: state.goodsDetail.goods_id,
+      name: state.goodsDetail.goods_name,
+      price: state.goodsDetail.goods_price,
+      image: state.goodsDetail.goods_big_logo,
+      count: 1
+    })
+    return showSuccessToast('加购成功,请到购物车下单')
+  } else return showFailToast('购物车满啦，先去下单清空吧！')
 }
+// 点击购买
+// const handleBuyNow = async () => {
+//   showSuccessToast('功能开发中')
+// }
 
 </script>
 

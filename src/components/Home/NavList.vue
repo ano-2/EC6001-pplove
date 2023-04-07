@@ -2,14 +2,16 @@
 <!--  -->
 <template>
   <div class="nav-list">
-    <router-link to="/productList" >
-      <van-grid :border="false" :column-num="4" >
+
+      <van-grid :border="false" :column-num="5" center>
         <van-grid-item v-for="(item,index) in iconList" :key="index">
-          <svg class="icon" aria-hidden="true"><use :xlink:href="item.icon"></use></svg>
-          <p>{{ item.title }}</p>
+          <router-link :to="item.to" >
+            <svg class="icon" aria-hidden="true"><use :xlink:href="item.icon"></use></svg>
+            <p>{{ item.title }}</p>
+          </router-link>
         </van-grid-item>
       </van-grid>
-    </router-link>
+
   </div>
 </template>
 
@@ -17,28 +19,47 @@
 const iconList = [
   {
     icon: '#icon-red-chongwuxiujian',
-    title: '修剪用品'
+    title: '修剪用品',
+    to: '/productList'
   }, {
     icon: '#icon-chongwushipin',
-    title: '大牌狗粮'
+    title: '大牌狗粮',
+    to: '/productList'
   }, {
     icon: '#icon-1',
-    title: '进口猫粮'
-  }, {
-    icon: '#icon-red-chongwuxizao',
-    title: '宠物洗护'
-  }, {
+    title: '进口猫粮',
+    to: '/productList'
+  },
+  {
     icon: '#icon-red-chongwufushi',
-    title: '萌宠服饰'
+    title: '萌宠服饰',
+    to: '/productList'
   }, {
     icon: '#icon-red-chongwugutou',
-    title: '冻干零食'
-  }, {
+    title: '冻干零食',
+    to: '/productList'
+  },
+  {
+    icon: '#icon-red-chongwuxizao',
+    title: '幼宠养护',
+    to: '/productList'
+  },
+  {
     icon: '#icon-chongwulianyi',
-    title: '宠物联谊'
+    title: '宠物配对',
+    to: '/community'
   }, {
-    icon: '#icon-_shequluntan',
-    title: '社区'
+    icon: '#icon-chongwuhunpei',
+    title: '婚庆',
+    to: '/community'
+  }, {
+    icon: '#icon-chongwushibie',
+    title: '健康鉴定',
+    to: '/community'
+  }, {
+    icon: '#icon-gengduo',
+    title: 'More',
+    to: '/category'
   }
 ]
 </script>
@@ -48,6 +69,7 @@ const iconList = [
   color: @primary;
 }
 .nav-list{
+  text-align: center;
   p{
     margin-block-end: 0;
   }

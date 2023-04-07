@@ -19,9 +19,9 @@
       <div class="user-contain">
         <!-- user-order -->
         <div class="user-order">
-            <van-cell-group  @click="coding" inset>
-                <van-cell title="我的订单" @click="coding" value="内容" is-link/>
-                <van-cell>
+            <van-cell-group inset>
+                <van-cell title="我的订单" to="/order"  is-link/>
+                <van-cell to="/order">
                   <van-grid :border="false"  :column-num="3">
                     <van-grid-item v-for="(item,index) in orderIcon" :key="index">
                       <svg class="icon" aria-hidden="true"><use :xlink:href="item.icon"></use></svg>
@@ -34,7 +34,7 @@
         <br>
         <div class="user-order">
             <van-cell-group @click="coding" inset>
-                <van-cell title="我的订单" value="内容" is-link/>
+                <van-cell title="个人中心" is-link/>
                 <van-cell>
                   <van-grid :border="false"  :column-num="3">
                     <van-grid-item icon="photo-o" text="文字" />
@@ -79,7 +79,6 @@ const initUserInfo = async () => {
   const { data: res } = await getUserInfo(id)
   if (res.meta.status === 200) {
     state.userInfo = res.data
-    console.log(state.userInfo.email)
   } else {
     showFailToast(res.meta.msg)
   }
@@ -91,7 +90,8 @@ const coding = () => {
 }
 
 const logout = () => {
-  localStorage.setItem('token', '')
+  localStorage.clear()
+  // localStorage.setItem('token', '')
   window.location.href = '/home'
 }
 

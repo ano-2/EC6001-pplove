@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
 import {
   Button, Swipe, SwipeCell, SwipeItem, Empty, Sidebar, SidebarItem, Col, Row, Skeleton, Toast
   , PullRefresh, List, Card, Cascader, ActionBar, ActionBarIcon, ActionBarButton, BackTop,
-  CellGroup, Field
+  CellGroup, Field, Tab, Tabs
 } from 'vant'
 
 import 'lib-flexible/flexible' // 自动媒体查询改变 root font size
@@ -43,6 +43,8 @@ app.use(Button)
   .use(BackTop)
   .use(CellGroup)
   .use(Field)
+  .use(Tab)
+  .use(Tabs)
 // 全局过滤器
 app.config.globalProperties.$filters = {
   prefix (url) {

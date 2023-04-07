@@ -3,21 +3,36 @@
 <template>
   <div class="cate-page">
     <!-- 顶部导航栏 -->
-    <van-search
+    <!-- <van-search
+      v-model="queryInfo.query"
+      shape="round"
+      placeholder="请输入搜索关键词"
+      @click="onClickSearch"
+      /> -->
+    <!-- 顶部搜索栏 -->
+    <div class="search-header">
+      <van-search
       v-model="queryInfo.query"
       shape="round"
       placeholder="请输入搜索关键词"
       @click="onClickSearch"
       />
+      <div class="return" @click="toCart">
+        <van-icon name="shopping-cart-o" size="20" :badge="cartItemCount"/>
+      </div>
+    </div>
     <!-- 左侧导航栏 -->
     <van-row>
       <van-col span="5">
+        <van-sidebar v-model="active1">
+          <van-sidebar-item title="全品类" to="/productList"></van-sidebar-item>
+        </van-sidebar>
+        <van-sidebar @change="handleSideChange()" v-model="active">
+            <van-sidebar-item v-for="fstCat in state.cateList" :key="fstCat.cat_id" :title="fstCat.cat_name">
+                <!-- <div v-for="secondCat in fstCat.children" :key="secondCat.cat_id">{{ secondCat.cat_name }}</div> -->
+            </van-sidebar-item>
 
-          <van-sidebar @change="handleSideChange()" v-model="active">
-              <van-sidebar-item v-for="fstCat in state.cateList" :key="fstCat.cat_id" :title="fstCat.cat_name">
-                  <!-- <div v-for="secondCat in fstCat.children" :key="secondCat.cat_id">{{ secondCat.cat_name }}</div> -->
-              </van-sidebar-item>
-          </van-sidebar>
+        </van-sidebar>
 
       </van-col>
       <!-- 右侧内容 -->
@@ -33,10 +48,16 @@
 <script setup>
 import CateList from '@/components/Category/CateList.vue'
 import navBar from '@/components/NavBar.vue'
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, computed } from 'vue'
 import { getCategories } from '@/service/good.js'
 import { showFailToast } from 'vant'
 import { useRouter } from 'vue-router'
+import { useCartStore } from '@/stores/cart.js'
+import { storeToRefs } from 'pinia'
+
+const cart = useCartStore()
+const { cartItems } = storeToRefs(cart)
+const cartItemCount = computed(() => cartItems.value.length)
 const queryInfo = {
   type: 3, // [1,2,3] 分类级别
   pagenum: 1,
@@ -46,9 +67,11 @@ const state = reactive({
   cateList: [],
   secondCate: null
 })
+const active1 = ref(10)
 const active = ref(0)
 const init = async () => {
   const { data: res } = await getCategories({ params: queryInfo })
+  // console.log(res.data)
   if (res.meta.status === 200) {
     state.cateList = res.data
     state.secondCate = res.data[0].children
@@ -81,9 +104,28 @@ const router = useRouter()
 const onClickSearch = () => {
   router.push({ path: '/productList' })
 }
+// 点击购物车按钮
+const toCart = () => {
+  router.push({ path: '/cart' })
+}
+
 </script>
 <style scoped lang='less'>
-
+.search-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .return{
+    width: 35px;
+    // text-align: center;
+    // i{
+    //   line-height: 56px;
+    // }
+  }
+  .van-search{
+    flex: 1;
+  }
+}
 .cate-page{
   touch-action: pan-y;
 }

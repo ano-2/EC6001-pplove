@@ -9,6 +9,7 @@
       @click-left="onClickLeft"
     />
     <div class="login-form">
+      <div><h3>体验账号</h3></div>
       <van-form @submit="tryLogin">
         <van-cell-group inset>
           <van-field v-model="state.username"   label="username" placeholder="请输入用户名"
@@ -33,8 +34,8 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const state = reactive({
-  username: '',
-  password: ''
+  username: '57497740',
+  password: '57497740'
 })
 const tryLogin = async () => {
   const { data: res } = await login(state)
@@ -63,6 +64,7 @@ const onClickLeft = () => {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center
   }
   .btn{
     .boxSizing();

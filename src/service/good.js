@@ -11,3 +11,8 @@ export function getCategories (params) {
 export function getProDetail (id) {
   return axios.get(`goods/${id}`)
 }
+
+// 编辑产品/帖子
+export function editProduct (id, params) {
+  return axios.put(`goods/${id}`, params)
+}

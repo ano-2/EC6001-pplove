@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1239932",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e69b",
+      "unicode_decimal": 59035
+    },
+    {
+      "icon_id": "25163505",
+      "name": "婚庆礼仪",
+      "font_class": "hunqingliyi",
+      "unicode": "fd3e",
+      "unicode_decimal": 64830
+    },
+    {
+      "icon_id": "781032",
+      "name": "微信支付",
+      "font_class": "weixinzhifu",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "1486848",
+      "name": "支付宝支付",
+      "font_class": "zhifubaozhifu",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "6360061",
+      "name": "支付平台-master",
+      "font_class": "zhifupingtai-master",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "6360092",
+      "name": "支付平台-银联",
+      "font_class": "zhifupingtai-yinlian",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "11294414",
+      "name": "icon_支付(visa)",
+      "font_class": "icon_zhifuvisa",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
       "icon_id": "5672445",
       "name": "订单",
       "font_class": "dingdan",

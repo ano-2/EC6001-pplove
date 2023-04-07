@@ -2,13 +2,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!--  -->
 <template>
-    <!-- 顶部导航栏 -->
-    <!-- <van-nav-bar
-    title='产品列表'
-    left-text="Back"
-    left-arrow
-    @click-left="onClickLeft"
-    /> -->
+    <!-- 顶部搜索栏 -->
     <div class="search-header">
       <div class="return" @click="onClickLeft">
         <van-icon name="arrow-left" size="20"/>
@@ -19,6 +13,9 @@
       placeholder="请输入搜索关键词"
       @search="onSearch"
       />
+      <div class="cart" @click="toCart">
+        <van-icon name="shopping-cart-o" size="20" :badge="cartItemCount"/>
+      </div>
     </div>
 
     <!-- 级联选择器 -->
@@ -48,9 +45,9 @@
           :finished="state.finished"
           :finished-text="state.productList.length ? 'No more' : 'Search for the product you want'"
           @load="onLoad"
-          @offset="2"
+          @offset="0"
         >
-          <ProList :productList="state.productList"/>
+          <ProList :productList1="state.productList1" :productList="state.productList"/>
         </van-list>
     </div>
     <!-- 底部导航栏 -->
@@ -60,15 +57,22 @@
 <script setup>
 
 import navBar from '@/components/NavBar.vue'
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getGoods, getCategories } from '@/service/good.js'
 import { showFailToast } from 'vant'
 import ProList from '@/components/Product/ProList.vue'
+import { useCartStore } from '@/stores/cart.js'
+import { storeToRefs } from 'pinia'
+
+const cart = useCartStore()
+const { cartItems } = storeToRefs(cart)
+const cartItemCount = computed(() => cartItems.value.length)
 // import _ from 'lodash'
 const state = reactive({
   // 产品列表
   productList: [],
+  productList1: [],
   // 加载中标志位
   loading: false,
   // 加载结束标志位
@@ -123,8 +127,14 @@ const getPrdList = async () => {
   const { data: res } = await getGoods(queryInfo)
   state.finished = false
   if (res.meta.status === 200) {
-    state.productList = res.data.goods
-    // console.log(state.productList)
+    const arr = []
+    const arr1 = []
+    // eslint-disable-next-line array-callback-return
+    res.data.goods.forEach((item, index) => {
+      index % 2 === 0 ? arr.push(item) : arr1.push(item)
+    })
+    state.productList = arr
+    state.productList1 = arr1
     state.totalPage = Math.ceil(res.data.total / queryInfo.pagesize)
     state.loading = false
     if (state.totalPage >= res.data.totalPage) state.finished = true
@@ -179,17 +189,35 @@ const scrollList = async () => {
     queryInfo.cat_three_id = Number(cat_id)
   }
   const { data: res } = await getGoods(queryInfo)
+  // 将产品图片赋值给logo
+  // res.data.goods.forEach(async (item) => {
+  //   const { data: detialRes } = await getProDetail(item.goods_id)
+  //   if (detialRes.data.pics[0].pics_sma_url) {
+  //     detialRes.data.goods_big_logo = detialRes.data.pics[0].pics_sma_url
+  //     await editProduct(item.goods_id, detialRes.data)
+  //   }
+  //   if (detialRes.data.pics[0].pics_mid_url) {
+  //     detialRes.data.goods_big_logo = detialRes.data.pics[0].pics_mid_url
+  //     await editProduct(item.goods_id, detialRes.data)
+  //   }
+  // })
+  //
   if (res.meta.status !== 200) { return showFailToast('获取失败') }
   state.totalPage = Math.ceil(res.data.total / queryInfo.pagesize)
-  state.productList = state.productList.concat(res.data.goods)
+
+  // eslint-disable-next-line array-callback-return
+  res.data.goods.forEach((item, index) => {
+    index % 2 === 0 ? state.productList.push(item) : state.productList1.push(item)
+  })
+
   state.loading = false
   if (queryInfo.pagenum >= res.data.totalPage) state.finished = true
 }
 // 列表滚动到底部时 触发 请求下一页数据
 const onLoad = () => {
-  // console.log('滚动开始')
-  // console.log(queryInfo.pagenum)
-  // console.log(state.totalPage)
+  console.log('滚动开始')
+  console.log(queryInfo.pagenum)
+  console.log(state.totalPage)
   if (queryInfo.pagenum >= state.totalPage) {
     state.finished = true
     return
@@ -204,17 +232,25 @@ const onLoad = () => {
 const onClickLeft = () => {
   router.go(-1)
 }
+// 购物车按钮
+const toCart = () => {
+  router.push({ path: '/cart' })
+}
 </script>
 <style scoped lang='less'>
 .search-header{
   display: flex;
-  justify-content: s;
+  justify-content: space-around;
+  align-items: center;
   .return{
     width: 25px;
-    text-align: center;
-    i{
-      line-height: 56px;
-    }
+    // text-align: center;
+    // i{
+    //   line-height: 56px;
+    // }
+  }
+  .cart{
+    width: 35px;
   }
   .van-search{
     flex: 1;
@@ -224,10 +260,11 @@ const onClickLeft = () => {
   height: calc(~"(100vh - 150px)");
   width: 100vw;
   background-color: #f5f5f5;
-  overflow: hidden;
+  //overflow: hidden;
+  overflow-y:visible;
   overflow-y: scroll;
   .van-list{
-    height: 100%;
+    height: calc(~"(100vh - 150px)");
   }
 }
 
