@@ -4,8 +4,11 @@
     <div class="cate-list">
         <div class="cate-item" v-for="fist in cateData" :key="fist.cat_id">
             <h4>{{ fist.cat_name }}</h4>
-            <van-grid :column-num="4" :clickable="true" :border="false">
-                <van-grid-item v-for="item in fist.children" :key="item.cat_id" icon="photo-o" @click="clickCate(item)" :text="item.cat_name" />
+            <van-grid :clickable="true" :border="false">
+                <van-grid-item icon="photo-o" dot @click="clickOneCate(fist)" :text="fist.cat_name" />
+            </van-grid>
+            <van-grid  :column-num="4" :clickable="true" :border="false">
+                <van-grid-item v-for="item in fist.children" :key="item.cat_id"  @click="clickCate(item)" :text="item.cat_name" />
             </van-grid>
         </div>
     </div>
@@ -25,14 +28,18 @@ export default defineComponent({
   },
   setup () {
     const router = useRouter()
+    const clickOneCate = (item) => {
+      // console.log(item)
+      router.push({ path: '/productList', query: { cat_two_id: item.cat_id, cat_name: item.cat_name } })
+    }
     const clickCate = (item) => {
       // console.log(item)
-      router.push({ path: '/productList', query: { cat_id: item.cat_id, cat_name: item.cat_name } })
+      router.push({ path: '/productList', query: { cat_three_id: item.cat_id, cat_name: item.cat_name } })
     }
     // template要用的变量和函数return回去
     return {
-      clickCate
-
+      clickCate,
+      clickOneCate
     }
   }
 })

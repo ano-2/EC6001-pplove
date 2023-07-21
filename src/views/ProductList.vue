@@ -100,10 +100,16 @@ const init = async () => {
   // const newQuery = _.cloneDeep(queryInfo)
   if (route.query.cat_name !== undefined) {
   // eslint-disable-next-line camelcase
-    const { cat_id, cat_name } = route.query
+    if (route.query.cat_two_id) {
+      queryInfo.cat_two_id = Number(route.query.cat_two_id)
+    }else{
+      queryInfo.cat_three_id = Number(route.query.cat_three_id)
+    }
+    // const { cat_id, cat_name } = route.query
     // eslint-disable-next-line camelcase
-    queryInfo.cat_name = cat_name
-    queryInfo.cat_three_id = Number(cat_id)
+    queryInfo.cat_name = route.query.cat_name
+    // queryInfo.cat_three_id = Number(cat_id)
+
     state.fieldValue = `${queryInfo.cat_name}   （点击选择产品类别）`
   }
   getPrdList()

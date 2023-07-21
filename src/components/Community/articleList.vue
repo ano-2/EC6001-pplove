@@ -15,7 +15,7 @@
           <div class="item-info">
             <div class="goods-name van-multi-ellipsis--l2">{{ item.goods_name }}</div>
             <div class="prize-amount">
-              <span class="amount van-multi-ellipsis--l2"> {{ JSON.parse(item.goods_editor).email  }}</span>
+              <span class="amount van-multi-ellipsis--l2"> {{ item.goods_editor?JSON.parse(item.goods_editor).email:'匿名用户'  }}</span>
               <span class="amount"> <van-icon name="eye-o" />{{ item.goods_number }}</span>
             </div>
           </div>
@@ -35,7 +35,7 @@
           <div class="item-info">
             <div class="goods-name van-multi-ellipsis--l2">{{ item.goods_name }}</div>
             <div class="prize-amount ">
-              <span class="amount van-multi-ellipsis--l2"> {{ JSON.parse(item.goods_editor).email  }}</span>
+              <span class="amount van-multi-ellipsis--l2"> {{ item.goods_editor?JSON.parse(item.goods_editor).email:'匿名用户' }}</span>
               <span class="amount"> <van-icon name="eye-o" />{{ item.goods_number }}</span>
             </div>
           </div>

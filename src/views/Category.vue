@@ -111,10 +111,14 @@ const toCart = () => {
 
 </script>
 <style scoped lang='less'>
+@import '@/common/style/mixin';
+
 .search-header{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  // background:  @primary;
+  // color: aliceblue;
   .return{
     width: 35px;
     // text-align: center;
@@ -124,6 +128,7 @@ const toCart = () => {
   }
   .van-search{
     flex: 1;
+    // background:  @primary;
   }
 }
 .cate-page{

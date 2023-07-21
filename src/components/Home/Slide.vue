@@ -1,13 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!--  -->
 <template>
-  <van-swipe class="my-swipe" lazy-render :autoplay="3000" indicator-color="#1baeae">
+  <div class="index-swipe"></div>
+  <van-swipe class="my-swipe" lazy-render :autoplay="3000" indicator-color="#053396">
     <van-swipe-item v-for="(item, index) in homeSlide" :key="index">
       <!-- {{ item.url }} -->
       <van-image
         height="100%"
         fit="cover"
-        position="bottom"
+        position="top"
         :src="item.url"
       />
     </van-swipe-item>
@@ -25,9 +26,21 @@ const homeSlide = reactive([
 ])
 </script>
 <style scoped lang='less'>
-.my-swipe{
+@import '@/common/style/mixin';
+.index-swipe{
   width: 100%;
-  height: 220px;
+  position: absolute;
+  height: 150px;
+  border-bottom-left-radius: 45%;
+  border-bottom-right-radius: 45%;
+  background: @primary;
+}
+.my-swipe{
+  box-sizing: border-box;
+  margin: 50px 10px 0;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 10PX;
   & .van-swipe-item {
     color: #fff;
     font-size: 20px;

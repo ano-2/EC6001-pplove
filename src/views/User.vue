@@ -3,7 +3,7 @@
 <template>
     <div class="user">
       <!-- 顶部导航栏 -->
-      <van-nav-bar title="个人中心"/>
+      <van-nav-bar title="个人中心" :safe-area-inset-top="true"/>
       <van-skeleton title :avatar="true" :row="3" :loading="state.userInfo.length===0?true:false">
         <div class="user-info">
             <div class="info">
@@ -32,14 +32,34 @@
             </van-cell-group>
         </div>
         <br>
+        <!-- 个人中心 -->
         <div class="user-order">
             <van-cell-group @click="coding" inset>
                 <van-cell title="个人中心" is-link/>
                 <van-cell>
                   <van-grid :border="false"  :column-num="3">
+                    <van-grid-item icon="award-o" text="积分" />
+                    <van-grid-item icon="manager-o" text="文字" />
                     <van-grid-item icon="photo-o" text="文字" />
-                    <van-grid-item icon="photo-o" text="文字" />
-                    <van-grid-item icon="photo-o" text="文字" />
+                  </van-grid>
+                </van-cell>
+            </van-cell-group>
+        </div>
+        <br>
+        <!-- 我的宠物 -->
+        <div class="user-order">
+            <van-cell-group @click="coding" inset>
+                <van-cell title="我的宠物 My Pet" is-link/>
+                <van-cell>
+                  <van-grid :border="false"  :column-num="3">
+                    <van-grid-item icon="photo-o" text="文字" >
+                      <svg class="icon" aria-hidden="true"><use xlink:href="#icon-bianjichongwuziliao"></use></svg>
+                      <p>My Pet</p>
+                    </van-grid-item>
+                    <van-grid-item >
+                      <svg class="icon" aria-hidden="true"><use xlink:href="#icon-chongwushibie"></use></svg>
+                      <p>健康报告</p>
+                    </van-grid-item>
                   </van-grid>
                 </van-cell>
             </van-cell-group>

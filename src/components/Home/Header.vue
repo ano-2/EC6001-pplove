@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <!--  -->
 <template>
-    <header class="home-header wrap" :class="{'active' : state.Scroll}">
+    <header class="home-header wrap " :class="{'active' : state.Scroll}">
         <router-link class="menu"  to="/category"><van-icon name="wap-nav" /></router-link>
         <div class="header-search">
             <span class="app-name">PPLove</span>
@@ -14,21 +14,27 @@
 <script setup>
 
 import { reactive } from 'vue'
-import { onBeforeRouteLeave } from 'vue-router'
+// import { onBeforeRouteLeave } from 'vue-router'
 
 const state = reactive({
-  Scroll: false // 滚动透明判断
+  Scroll: true // 滚动透明判断
 })
 // 滚动判断函数
-const scrollFunc = function () {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-  scrollTop > 100 ? state.Scroll = true : state.Scroll = false
-}
-document.addEventListener('scroll', scrollFunc)
-onBeforeRouteLeave(() => {
-  // 离开组件则消除监听
-  document.removeEventListener('scroll', scrollFunc)
-})
+// const scrollFunc = function () {
+//   const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+//   scrollTop > 100 ? state.Scroll = true : state.Scroll = false
+// }
+// document.addEventListener('scroll', scrollFunc)
+// onBeforeRouteLeave(() => {
+//   // 离开组件则
+//   const headerDOM = document.querySelector('.home-header')
+//   headerDOM.style.background = '#fff'
+// })
+// const changeColor = () => {
+//   const headerDOM = document.querySelector('body')
+
+//   headerDOM.style.background = '#fff'
+// }
 </script>
 <style scoped lang='less'>
 @import '@/common/style/mixin';
@@ -63,7 +69,7 @@ onBeforeRouteLeave(() => {
         line-height: 30px;
         margin: 10px 0;
         border-radius: 20px;
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.85);
         .app-name {
             padding: 0 15px;
             color: @primary;

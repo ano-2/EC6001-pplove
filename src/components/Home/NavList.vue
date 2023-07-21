@@ -18,28 +18,6 @@
 <script setup>
 const iconList = [
   {
-    icon: '#icon-red-chongwuxiujian',
-    title: '修剪用品',
-    to: '/productList'
-  }, {
-    icon: '#icon-chongwushipin',
-    title: '大牌狗粮',
-    to: '/productList'
-  }, {
-    icon: '#icon-1',
-    title: '进口猫粮',
-    to: '/productList'
-  },
-  {
-    icon: '#icon-red-chongwufushi',
-    title: '萌宠服饰',
-    to: '/productList'
-  }, {
-    icon: '#icon-red-chongwugutou',
-    title: '冻干零食',
-    to: '/productList'
-  },
-  {
     icon: '#icon-red-chongwuxizao',
     title: '幼宠养护',
     to: '/productList'
@@ -55,11 +33,33 @@ const iconList = [
   }, {
     icon: '#icon-chongwushibie',
     title: '健康鉴定',
-    to: '/community'
+    to: '/productList?cat_two_id=1552&cat_name=猫鉴定'
   }, {
     icon: '#icon-gengduo',
     title: 'More',
     to: '/category'
+  },
+  {
+    icon: '#icon-red-chongwuxiujian',
+    title: '修剪用品',
+    to: '/productList'
+  }, {
+    icon: '#icon-chongwushipin',
+    title: '大牌狗粮',
+    to: '/productList?cat_two_id=1491&cat_name=犬糧'
+  }, {
+    icon: '#icon-1',
+    title: '进口猫粮',
+    to: '/productList?cat_two_id=1490&cat_name=貓糧'
+  },
+  {
+    icon: '#icon-red-chongwufushi',
+    title: '萌宠服饰',
+    to: '/productList'
+  }, {
+    icon: '#icon-red-chongwugutou',
+    title: '冻干零食',
+    to: '/productList'
   }
 ]
 </script>

@@ -14,7 +14,7 @@
       <van-action-bar>
         <van-action-bar-icon icon="wap-home-o" to="/home"  text="主页" />
         <van-action-bar-icon icon="cart-o" :badge="cartItemCount" to="/cart" text="购物车" />
-        <van-action-bar-button type="warning" @click="handleAddCart" text="加入购物车" />
+        <van-action-bar-button type="primary" @click="handleAddCart" text="加入购物车" />
       </van-action-bar>
     </div>
   </div>
